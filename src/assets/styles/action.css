@@ -1,0 +1,44 @@
+#pageDropDown {
+    display: inline-block;
+    width: 60px !important;
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 0.15s, 0.15s, 0.15s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
+    transition-delay: 0s, 0s, 0s;   
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem 1.75rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    vertical-align: middle;
+    background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%235a5c69' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right .75rem center/8px 10px no-repeat;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#pageDropDown::after {
+    display: none;
+}
+
+.dropdown-menu {
+    width: 60px !important;
+    min-width: fit-content;
+}
+
+a {
+    text-decoration: none;
+    color: #6e707e
+}
+
+.sortable {
+    min-width: 64px;
+    max-width: 64px;
+    color: #fff;
+    background-color: #5a5c69 !important;
+    box-sizing: border-box;
+    border-color: #6c6e7e !important;
+}
