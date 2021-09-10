@@ -42,3 +42,14 @@ a {
     box-sizing: border-box;
     border-color: #6c6e7e !important;
 }
+
+.modal-header {
+    background-color: #004a97 !important;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+.update_text {
+    cursor: pointer;
+    color: #004c97;
+}
