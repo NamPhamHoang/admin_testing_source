@@ -22,7 +22,15 @@ const CustomTable = ({data, columns, defaultSorted}) => {
         prePageText: "Previous",
         custom: true,
     };
-
+    const expandRow = {
+        renderer: (row, rowIndex) => (
+          <div>
+            <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
+            <p>You can render anything here, also you can add additional data on every row object</p>
+            <p>expandRow.renderer callback will pass the origin row object to you</p>
+          </div>
+        )
+      };
     return (
       
             <ToolkitProvider
@@ -60,9 +68,11 @@ const CustomTable = ({data, columns, defaultSorted}) => {
                                             <BootstrapTable
                                                 bootstrap4
                                                 striped
-                                                key="1"
+                                                key="0"
                                                 keyField="id"
+                                                classes="dataTable table-bordered table-striped table-hover small display nowrap hide-sort dtr-inline"
                                                 defaultSorted={defaultSorted}
+                                                expandRow={ expandRow }
                                                 {...paginationTableProps}
                                                 {...props.baseProps}
                                             />

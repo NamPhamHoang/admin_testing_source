@@ -46,13 +46,9 @@ const InputForm = ({values, setValues, onSubmit, onHandleShowModal, modalType}) 
             }); break
         }
     }
-    const handleSubmit = e => {
-        e.preventDefault();
-        onSubmit(values)
-    }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form>
              <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Text className="text-muted">
                     Select the type of badge that you will issue from the list
@@ -78,7 +74,7 @@ const InputForm = ({values, setValues, onSubmit, onHandleShowModal, modalType}) 
                     placeholder="Or, if not listed, enter the mobile number in international format" 
                 />
             </Form.Group>
-          
+            <hr/>
             <div className="d-flex justify-content-end">
                 <Button 
                     className="mr-2" 

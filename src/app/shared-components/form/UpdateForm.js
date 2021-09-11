@@ -121,6 +121,7 @@ onHandleShowModal("CONFIRM")
     <>
       <Form>
         {content}
+        <hr/>
         <div className="d-flex justify-content-end">
           <Button className="mr-2" variant="primary" type="button" onClick={() => onUpdateField()}>
             Update

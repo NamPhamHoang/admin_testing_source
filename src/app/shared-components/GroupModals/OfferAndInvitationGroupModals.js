@@ -6,7 +6,6 @@ import InputForm from "../form/InputForm";
 import UpdateForm from "../form/UpdateForm";
 
 const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) => {
-    console.log(modalType)
     let title = "";
     switch(modalType) {
         case MODAL_OFFER_TYPE: {
@@ -35,7 +34,6 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
     }
 
     const onUpdate = (data) => {
-        console.log(data)
         switch(updateField.type) {
             case TEAM_MATE: {
                 setValues({
