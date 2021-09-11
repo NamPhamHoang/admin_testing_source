@@ -1,7 +1,5 @@
 import React from "react";
 import { Collapse } from "react-bootstrap";
-import { PENDING_INVITATION } from "../constants/types";
-
 
 const CustomCardCollapse = ({id, title, content, isCollapse, handleCollapse, amountValues}) => {
     return (

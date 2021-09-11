@@ -8,10 +8,10 @@ import paginationFactory, {
     PaginationTotalStandalone,
     PaginationListStandalone,
 } from "react-bootstrap-table2-paginator";
-import "../../assets/styles/action.css";
+import "../../../assets/styles/action.css";
 const { SearchBar, ClearSearchButton } = Search;
 
-const CustomTable = ({data, columns, defaultSorted}) => {
+const CustomTable = ({expandRow, data, columns, defaultSorted}) => {
     const pagination = {
         page: 1,
         sizePerPage: 3,
@@ -22,15 +22,6 @@ const CustomTable = ({data, columns, defaultSorted}) => {
         prePageText: "Previous",
         custom: true,
     };
-    const expandRow = {
-        renderer: (row, rowIndex) => (
-          <div>
-            <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
-            <p>You can render anything here, also you can add additional data on every row object</p>
-            <p>expandRow.renderer callback will pass the origin row object to you</p>
-          </div>
-        )
-      };
     return (
       
             <ToolkitProvider
@@ -51,8 +42,8 @@ const CustomTable = ({data, columns, defaultSorted}) => {
                                     paginationTableProps
                                 }) => (
                                     <div>
-                                        <div className="d-flex justify-content-between">
-                                            <span>
+                                        <div className="d-flex flex-column flex-md-row flex-sm-column wrap justify-content-between">
+                                            <span className="mt-2 mb-2">
                                                 Show {" "}
                                                 <SizePerPageDropdownStandalone
                                                     className="custom_size_perpage"
@@ -60,10 +51,12 @@ const CustomTable = ({data, columns, defaultSorted}) => {
                                                 />
                                                 {" "} entries
                                             </span>
-
-                                            <SearchBar {...props.searchProps} />
+                                            <span className = "mt-2 mb-2">
+                                                <SearchBar 
+                                                    {...props.searchProps} 
+                                                />
+                                            </span>
                                         </div>
-
                                         <div className="table-responsive">
                                             <BootstrapTable
                                                 bootstrap4
@@ -73,19 +66,24 @@ const CustomTable = ({data, columns, defaultSorted}) => {
                                                 classes="dataTable table-bordered table-striped table-hover small display nowrap hide-sort dtr-inline"
                                                 defaultSorted={defaultSorted}
                                                 expandRow={ expandRow }
+                                                rowClasses="custom-row-class"
                                                 {...paginationTableProps}
                                                 {...props.baseProps}
                                             />
                                         </div>
-                                        <div className="d-flex justify-content-between">
-                                            <PaginationTotalStandalone
-                                                {...paginationProps}
-                                            />
-                                            <PaginationListStandalone
-                                                alwaysShowAllBtn={true}
-                                                withFirstAndLast={false}
-                                                {...paginationProps}
-                                            />
+                                        <div className="d-flex flex-column flex-md-row flex-sm-column wrap justify-content-between align-items-center">
+                                            <span className = "mt-2 mb-2">
+                                                <PaginationTotalStandalone
+                                                    {...paginationProps}
+                                                />
+                                            </span>
+                                            <span className = "mt-2 mb-2">
+                                                <PaginationListStandalone
+                                                    alwaysShowAllBtn={true}
+                                                    withFirstAndLast={false}
+                                                    {...paginationProps}
+                                                />
+                                            </span>
                                         </div>
                                     </div>
                                 )

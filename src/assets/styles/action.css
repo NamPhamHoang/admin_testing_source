@@ -53,3 +53,9 @@ a {
     cursor: pointer;
     color: #004c97;
 }
+
+@media only screen and (min-width: 1156px) {
+	.table-responsive {
+		overflow-x: hidden !important;
+	}
+}

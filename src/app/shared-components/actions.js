@@ -14,13 +14,18 @@ import myPromisesData from "../../assets/data/MyPromise.json";
 import pendingOfferData from "../../assets/data/PendingOffer.json";
 import promisestoOwedData from "../../assets/data/PromisesOwedToMe.json";
 import "../../assets/styles/action.css";
-import CustomTable from "./CustomTable";
+import CustomTable from "./table/CustomTable";
 import CustomCardCollapse from "./CustomCardCollapse";
 import OfferAndInvitationGroupModals from "./GroupModals/OfferAndInvitationGroupModals";
 import { Button } from "react-bootstrap";
 import RequestBadgeGroupModal from "./GroupModals/RequestBadgeGroupModal";
 import AcceptGroupModal from "./GroupModals/AcceptGroupModal";
-
+import {
+  myPromiseExpandRow,
+  pendingInvitationExpandRow,
+  pendingOfferExpandRow,
+  promisesOwedToMeExpandRow,
+} from "./table/ExpandRowTable";
 const Actions = () => {
   const pendingInvitationColumns = [
     {
@@ -31,22 +36,51 @@ const Actions = () => {
       footerClasses: "sortable",
       formatter: (cell, row) => {
         return (
-          <div className="d-flex wrap">
+          <div className="d-flex flex-md-column flex-sm-row wrap">
             <Button
-              className="mr-2"
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
               variant="primary"
               type="button"
-              onClick={() => setIsOpenAcceptModal({
-                isOpen: {
-                  inputModal: true
-                }
-              })}
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
             >
-              ACCEPT
+              Accept
             </Button>
-            <Button type="button">
-              DECLINE
+            <span 
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
             </Button>
+            <span 
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
           </div>
         );
       },
@@ -94,6 +128,7 @@ const Actions = () => {
       text: "TO",
       sort: true,
       footer: "TO",
+      header: "TO",
       footerClasses: "sortable",
     },
     {
@@ -130,7 +165,6 @@ const Actions = () => {
       sort: true,
       footer: "REQUEST A BADGE",
       footerClasses: "sortable",
-      classes: "d-flex align-items-center justify-content-center",
       formatter: (cell, row) => {
         return (
           <>
@@ -138,7 +172,7 @@ const Actions = () => {
               cell
             ) : (
               <>
-                <span>
+                <span className="d-flex justify-content-center">
                   <Button
                     className="clarify btn bg-custom-primary text-center text-white d-none d-md-block"
                     onClick={() => {
@@ -167,8 +201,10 @@ const Actions = () => {
       dataField: "bchain",
       text: "BCHAIN ",
       sort: true,
+      classes: "d-sm-none d-md-table-cell",
       footer: "BCHAIN",
-      footerClasses: "sortable",
+      footerClasses: "sortable d-sm-none d-md-table-cell",
+      headerClasses: "d-sm-none d-md-table-cell",
       formatter: (cell, row) => {
         return (
           <>
@@ -184,6 +220,63 @@ const Actions = () => {
   ];
 
   const pendingOfferColumns = [
+    {
+      dataField: "action",
+      text: "ACTION ",
+      sort: true,
+      footer: "ACTION",
+      footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div className="d-flex flex-md-column flex-sm-row wrap">
+            <Button
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              Accept
+            </Button>
+            <span 
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
+            </Button>
+            <span 
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
+          </div>
+        );
+      },
+    },
     {
       dataField: "from",
       text: "FROM",
@@ -222,6 +315,56 @@ const Actions = () => {
   ];
 
   const promisestoOwedColumns = [
+    {
+      dataField: "action",
+      text: "ACTION ",
+      sort: true,
+      footer: "ACTION",
+      footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div className="d-flex flex-md-column flex-sm-row wrap">
+            <Button
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              Accept
+            </Button>
+            <span className="d-none d-sm-block d-md-none show-on-small">
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
+            </Button>
+            <span className="d-none d-sm-block d-md-none show-on-small">
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
+            >
+              Clarify
+            </Button>
+            <span>
+              <a href="#" className="d-none d-sm-block d-md-none show-on-small">
+                <i className="fas fa-history fa-2x" />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
     {
       dataField: "to",
       text: "TO",
@@ -263,32 +406,34 @@ const Actions = () => {
       sort: true,
       footer: "REQUEST A BADGE",
       footerClasses: "sortable",
-      classes: "d-flex align-items-center justify-content-center",
       formatter: (cell, row) => {
         return (
           <>
             {cell ? (
               cell
             ) : (
-              <div>
-                
-                  <Button
-                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block"
-                    onClick={() => {
-                      setIsOpenRequestModal({
-                        ...isOpenRequestModal,
-                        type: MODAL_REQUEST_TYPE,
-                        isOpen: {
-                          inputModal: true,
-                        },
-                      });
-                    }}
-                  >
-                    Request A Badge
-                  </Button>
-                
+              <div className="d-flex justify-content-center">
+                <Button
+                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block"
+                  onClick={() => {
+                    setIsOpenRequestModal({
+                      ...isOpenRequestModal,
+                      type: MODAL_REQUEST_TYPE,
+                      isOpen: {
+                        inputModal: true,
+                      },
+                    });
+                  }}
+                >
+                  Request A Badge
+                </Button>
+
                 <span className="d-none d-sm-block d-md-none show-on-small">
-                  <img src="/img/validation.png" alt="validation" width="32px" />
+                  <img
+                    src="/img/validation.png"
+                    alt="validation"
+                    width="32px"
+                  />
                 </span>
               </div>
             )}
@@ -484,6 +629,7 @@ const Actions = () => {
                     data={myPromisesData}
                     columns={myPromiseColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={myPromiseExpandRow}
                   />
                 }
                 isCollapse={openCollapse.myPromiseCollapse}
@@ -499,6 +645,7 @@ const Actions = () => {
                     data={pendingInvitaionData}
                     columns={pendingInvitationColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={pendingInvitationExpandRow}
                   />
                 }
                 isCollapse={openCollapse.pendingInvitationCollapse}
@@ -514,6 +661,7 @@ const Actions = () => {
                     data={pendingOfferData}
                     columns={pendingOfferColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={pendingOfferExpandRow}
                   />
                 }
                 isCollapse={openCollapse.pendingOfferCollapse}
@@ -528,6 +676,7 @@ const Actions = () => {
                     data={promisestoOwedData}
                     columns={promisestoOwedColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={promisesOwedToMeExpandRow}
                   />
                 }
                 isCollapse={openCollapse.promisedOwedToMeCollapse}
