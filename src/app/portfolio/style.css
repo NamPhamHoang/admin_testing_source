@@ -1,0 +1,23 @@
+.mr-3,
+.mx-3 {
+  margin-left: 17px !important;
+}
+.text-dark {
+  text-align: left;
+}
+.card-all {
+  margin: 25px;
+  margin-top: 0;
+}
+.text-portfolo {
+  margin: 25px;
+}
+.navbar-search {
+  color: #858796;
+}
+.navbar-search select {
+  color: #858796;
+}
+.collaspe2 {
+  background-color: #022ba2 !important;
+}

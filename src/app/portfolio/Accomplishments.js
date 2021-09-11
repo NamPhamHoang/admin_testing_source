@@ -10,14 +10,14 @@ const Accomplishments = () => {
   return (
     <div className="accomplish">
       <div className="accomplish__container">
-        <div className="d-sm-flex align-items-center justify-content-between mb-4">
+        <div className="d-sm-flex align-items-center justify-content-between mb-4 text-portfolo">
           <h1 className="h3 mb-0 text-gray-800 font-weight-bold">
             Commitment Portfolio
           </h1>
         </div>
         <div className="row">
           <div className="col">
-            <div className="card shadow mb-4">
+            <div className="card shadow mb-4 card-all">
               <a className="d-block card-header py-3 nounderline" href="#">
                 <h4 className="m-0 font-weight-bold text-dark">
                   Alex Todd

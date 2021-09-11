@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomCardCollapse from "../shared-components/CustomCardCollapse";
 import CustomTable from "../shared-components/CustomTable";
-import myPromisesData from "../../assets/data/MyPromise.json";
+import myPromisesData from "../../assets/data/MyPromisePortfolo.json";
 import {
   MY_PROMISE,
   PENDING_INVITATION,
@@ -65,7 +65,7 @@ const Commitments = () => {
     },
     {
       dataField: "requestABadge",
-      text: "REQUEST A BADGE",
+      text: "REQUEST DATE",
       sort: true,
       footer: "REQUESTED DATE",
       footerClasses: "sortable",
@@ -136,7 +136,7 @@ const Commitments = () => {
   };
 
   return (
-    <div className="card shadow">
+    <div className="card shadow card-all">
       <a
         href="#collapseCardExampleOne"
         className="d-block card-header py-3 bg-custom-secondary text-center"

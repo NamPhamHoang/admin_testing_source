@@ -4,6 +4,7 @@ import CommitmentsMade from "./CommitmentsMade";
 import CommitmentsReceived from "./CommitmentsReceived";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
+import "./style.css";
 
 const Portfolio = () => {
   return (

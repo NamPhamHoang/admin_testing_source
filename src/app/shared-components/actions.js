@@ -12,49 +12,47 @@ import pendingInvitaionData from "../../assets/data/PendingInvitation.json";
 import myPromisesData from "../../assets/data/MyPromise.json";
 import pendingOfferData from "../../assets/data/PendingOffer.json";
 import promisestoOwedData from "../../assets/data/PromisesOwedToMe.json";
-import "../../assets/styles/action.css"
+import "../../assets/styles/action.css";
 import CustomTable from "./CustomTable";
 import CustomCardCollapse from "./CustomCardCollapse";
 import OfferAndInvitationGroupModals from "./GroupModals/OfferAndInvitationGroupModals";
 
 const Actions = () => {
- 
- 
   const pendingInvitationColumns = [
     {
       dataField: "from",
       text: "FROM ",
       sort: true,
       footer: "FROM",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "description",
       text: "DESCRIPTION",
       sort: true,
       footer: "DESCRIPTION",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "createdDate",
       text: "CREATED DATE",
       sort: true,
       footer: "CREATED DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "badgeName",
       text: "BADGE NAME",
       sort: true,
       footer: "BADGE NAME",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "updatedDate",
       text: "UPDATED DATE",
       sort: true,
       footer: "UPDATED DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
   ];
 
@@ -64,51 +62,51 @@ const Actions = () => {
       text: "TO",
       sort: true,
       footer: "TO",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "description",
       text: "COMMITMENT DESCRIPTION",
       sort: true,
       footer: "COMMITMENT DESCRIPTION",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "committedDate",
       text: "COMMITTED DATE",
       sort: true,
       footer: "COMMITTED DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "dueDate",
       text: "DUE DATE",
       sort: true,
       footer: "DUE DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "badgeName",
       text: "BADGE NAME",
       sort: true,
       footer: "BADGE NAME",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "requestABadge",
       text: "REQUEST A BADGE",
       sort: true,
       footer: "REQUEST A BADGE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "bchain",
       text: "BCHAIN ",
       sort: true,
       footer: "BCHAIN",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
-  ]
+  ];
 
   const pendingOfferColumns = [
     {
@@ -116,37 +114,37 @@ const Actions = () => {
       text: "FROM",
       sort: true,
       footer: "FROM",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "description",
       text: "DESCRIPTION",
       sort: true,
       footer: "DESCRIPTION",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "createdDate",
       text: "CREATE DATE",
       sort: true,
       footer: "CREATE DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "badgeName",
       text: "BADGE NAME",
       sort: true,
       footer: "BADGE NAME",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "updatedDate",
       text: "UPDATED DATE",
       sort: true,
       footer: "UPDATED DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
-  ]
+  ];
 
   const promisestoOwedColumns = [
     {
@@ -154,52 +152,52 @@ const Actions = () => {
       text: "TO",
       sort: true,
       footer: "TO",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "description",
       text: "COMMITMENT DESCRIPTION",
       sort: true,
       footer: "COMMITMENT DESCRIPTION",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "committedDate",
       text: "COMMITTED DATE",
       sort: true,
       footer: "COMMITTED DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "dueDate",
       text: "DUE DATE",
       sort: true,
       footer: "DUE DATE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "badgeName",
       text: "BADGE NAME",
       sort: true,
       footer: "BADGE NAME",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "requestABadge",
       text: "REQUEST A BADGE",
       sort: true,
       footer: "REQUEST A BADGE",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
     {
       dataField: "bchain",
       text: "BCHAIN ",
       sort: true,
       footer: "BCHAIN",
-      footerClasses: 'sortable'
+      footerClasses: "sortable",
     },
-  ]
-  const myPromisesDataMoc = myPromisesData.map(data => {
+  ];
+  const myPromisesDataMoc = myPromisesData.map((data) => {
     return {
       ...data,
       requestABadge: () => {
@@ -215,16 +213,12 @@ const Actions = () => {
             </a>
           </span>
           <span className="d-none d-sm-block d-md-none show-on-small">
-            <img
-              src="img/validation.png"
-              alt="validation"
-              width="32px"
-            />
+            <img src="img/validation.png" alt="validation" width="32px" />
           </span>
-        </>
-      }
-    }
-  })
+        </>;
+      },
+    };
+  });
   const [openCollapse, setOpenCollapse] = useState({
     myPromiseCollapse: false,
     pendingInvitationCollapse: false,
@@ -237,9 +231,9 @@ const Actions = () => {
     isOpen: {
       inputModal: false,
       confirmModal: false,
-      updateModal: false
+      updateModal: false,
     },
-  })
+  });
 
   const defaultSorted = [
     {
@@ -283,12 +277,12 @@ const Actions = () => {
 
   const handleCloseModal = () => {
     setIsOpenModal({
-        ...isOpenModal,
-        isOpen: false
-    })
-  }
+      ...isOpenModal,
+      isOpen: false,
+    });
+  };
   return (
-    <div>
+    <div style={{ width: "85%" }}>
       {/* Page Wrapper */}
       <div id="wrapper">
         {/* Sidebar */}
@@ -314,13 +308,15 @@ const Actions = () => {
                 <div className="cta-btns mx-0 my-3">
                   <button
                     type="button"
-                    onClick={() => setIsOpenModal({
-                      ...isOpenModal,
-                      type: MODAL_OFFER_TYPE,
-                      isOpen: {
-                        inputModal: true
-                      }
-                    })}
+                    onClick={() =>
+                      setIsOpenModal({
+                        ...isOpenModal,
+                        type: MODAL_OFFER_TYPE,
+                        isOpen: {
+                          inputModal: true,
+                        },
+                      })
+                    }
                     className="btn bg-custom-secondary mr-2 ml-0 text-white"
                     data-toggle="modal"
                     data-target="#offer"
@@ -331,13 +327,15 @@ const Actions = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setIsOpenModal({
-                      ...isOpenModal,
-                      type: MODAL_INVITATION_TYPE,
-                      isOpen: {
-                        inputModal: true
-                      }
-                    })}
+                    onClick={() =>
+                      setIsOpenModal({
+                        ...isOpenModal,
+                        type: MODAL_INVITATION_TYPE,
+                        isOpen: {
+                          inputModal: true,
+                        },
+                      })
+                    }
                     className="btn bg-custom-primary text-white"
                     data-toggle="modal"
                     data-target="#invitation"
@@ -356,7 +354,7 @@ const Actions = () => {
               {/* Show Only on Medium and Large Devices */}
               {/* Collapsible Card Example */}
               <CustomCardCollapse
-                 id="collapseCardAction1"
+                id="collapseCardAction1"
                 title="My Promises"
                 amountValues={76}
                 content={
@@ -364,12 +362,12 @@ const Actions = () => {
                     data={myPromisesDataMoc}
                     columns={myPromiseColumns}
                     defaultSorted={defaultSorted}
-                    />
+                  />
                 }
-                    isCollapse={openCollapse.myPromiseCollapse}
-                    handleCollapse={() => handleCollapse(MY_PROMISE)}
-                />
-             {/* Collapsible Card Example */}
+                isCollapse={openCollapse.myPromiseCollapse}
+                handleCollapse={() => handleCollapse(MY_PROMISE)}
+              />
+              {/* Collapsible Card Example */}
               <CustomCardCollapse
                 id="collapseCardAction2"
                 title="Pending Invitation"
@@ -413,7 +411,7 @@ const Actions = () => {
                 isCollapse={openCollapse.promisedOwedToMeCollapse}
                 handleCollapse={() => handleCollapse(PROMISED_OWED_TO_ME)}
               />
-             </div>
+            </div>
             {/* END .container-fluid */}
           </div>
           {/* End of Main Content */}
@@ -483,9 +481,7 @@ const Actions = () => {
         handleClose={handleCloseModal}
       />
 
-
-
-   {/* Update Time Modal */}
+      {/* Update Time Modal */}
       <div
         className="modal fade"
         id="update-time"

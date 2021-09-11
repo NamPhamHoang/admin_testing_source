@@ -1,8 +1,37 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import Faq from "../../assets/images/faq.png";
+import PDF from "../../assets/images/pdf-file.png";
+import Profile from "../../assets/images/profile.svg";
+
+const options = [
+  "Teamwork",
+  "Leadership",
+  "Confidence",
+  "Communication",
+  "Covid-19 P2P Safety",
+  "Promise Kept General",
+  "Helping Hand",
+  "Self-care - Automated",
+  "Outreach",
+  "Helping Hand - Federated Health",
+  "TestReina2",
+  "Auto Questions",
+  "Promise Kept - Ryerson",
+];
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <form className="d-none d-sm-inline-flex form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <label for="exampleFormControlSelect1">Select Badges</label>
+        <select class="form-control ml-3" id="exampleFormControlSelect1">
+          {options.map((item, index) => (
+            <option key={index}>{item}</option>
+          ))}
+        </select>
+      </form>
+
       {/* Sidebar Toggle (Topbar) */}
       <button
         id="sidebarToggleTop"
@@ -59,7 +88,7 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <img src="img/faq.png" width="30px" />
+            <img src={Faq} width="30px" />
           </a>
           {/* Dropdown - Alerts */}
         </li>
@@ -75,7 +104,7 @@ const Header = () => {
             aria-expanded="false"
           >
             {/* Counter - Messages */}
-            <img src="img/pdf-file.png" width="30px" />
+            <img src={PDF} width="30px" />
           </a>
         </li>
         <div className="topbar-divider d-none d-sm-block" />
@@ -93,7 +122,7 @@ const Header = () => {
             <span className="mr-2 d-none d-lg-inline text-dark h5 mb-0 font-weight-bold">
               Alex Todd
             </span>
-            <img className="img-profile rounded-circle" src="img/profile.svg" />
+            <img className="img-profile rounded-circle" src={Profile} />
           </a>
           {/* Dropdown - User Information */}
           <div

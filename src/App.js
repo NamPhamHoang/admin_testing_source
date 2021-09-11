@@ -5,11 +5,24 @@ import "./assets/styles/custom.css";
 import Actions from "./app/shared-components/actions";
 import Temp from "./app/shared-components/temp";
 import Portfolio from "./app/portfolio";
+import Sidebar from "./app/layouts/SideBar";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      {/* <Actions /> */}
-      <Portfolio />
+      <div style={{ display: "flex", width: "100%" }}>
+        <Sidebar />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Actions />
+            </Route>
+            <Route exact path="/portfolio">
+              <Portfolio />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }

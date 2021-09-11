@@ -136,18 +136,19 @@ const CommitmentsReceived = () => {
   };
 
   return (
-    <div className="card shadow">
+    <div className="card shadow card-all">
       <a
         href="#collapseCardExampleTwo"
-        className="d-block card-header py-3 bg-custom-secondary text-center"
+        className="d-block card-header py-3 bg-custom-secondary text-center collaspe2"
         data-toggle="collapse"
         role="button"
         onClick={() => setOpen(!open)}
         aria-controls="example-collapse-text"
         aria-expanded={open}
-        style={{ backgroundColor: "#4e73df !important" }}
       >
-        <h5 className="m-0 text-center text-white">My Commitments Made</h5>
+        <h5 className="m-0 text-center text-white">
+          Commitments Received And Badges Issued
+        </h5>
       </a>
 
       <Collapse in={open}>
@@ -163,8 +164,9 @@ const CommitmentsReceived = () => {
                     <div className="row">
                       <div className="col-sm-12">
                         <CustomCardCollapse
+                          color={true}
                           id="collapseCardAction1"
-                          title="My Promises"
+                          title="Promises Owed To Me"
                           amountValues={76}
                           content={
                             <CustomTable
@@ -182,8 +184,9 @@ const CommitmentsReceived = () => {
                     <div className="row">
                       <div className="col-sm-12">
                         <CustomCardCollapse
+                          color={true}
                           id="collapseCardAction2"
-                          title="My Badges"
+                          title="Badges I Issued "
                           amountValues={76}
                           content={
                             <CustomTable
@@ -203,8 +206,9 @@ const CommitmentsReceived = () => {
                     <div className="row">
                       <div className="col-sm-12">
                         <CustomCardCollapse
+                          color={true}
                           id="collapseCardAction3"
-                          title="My Unkept Promises"
+                          title="Unkept Promises To Me"
                           amountValues={76}
                           content={
                             <CustomTable
