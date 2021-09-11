@@ -8,8 +8,8 @@ import Portfolio from "./app/portfolio";
 function App() {
   return (
     <div className="App">
-      <Actions />
-      {/* <Portfolio /> */}
+      {/* <Actions /> */}
+      <Portfolio />
     </div>
   );
 }
