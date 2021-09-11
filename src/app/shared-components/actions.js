@@ -203,8 +203,8 @@ const Actions = () => {
       sort: true,
       classes: "d-sm-none d-md-table-cell",
       footer: "BCHAIN",
-      footerClasses: "sortable d-sm-none d-md-table-cell",
-      headerClasses: "d-sm-none d-md-table-cell",
+      footerClasses: "footer-custom-promise",
+      headerClasses: "footer-custom-promise",
       formatter: (cell, row) => {
         return (
           <>
