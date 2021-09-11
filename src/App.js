@@ -3,8 +3,8 @@ import "./App.css";
 import "./assets/styles/sb-admin-2.min.css";
 import "./assets/styles/custom.css";
 import Actions from "./app/shared-components/actions";
+import Temp from "./app/shared-components/temp";
 import Portfolio from "./app/portfolio";
-
 function App() {
   return (
     <div className="App">

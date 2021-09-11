@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Collapse } from "react-bootstrap";
 import {
+  MODAL_INVITATION_TYPE,
+  MODAL_OFFER_TYPE,
   MY_PROMISE,
   PENDING_INVITATION,
   PENDING_OFFER,
@@ -14,8 +15,11 @@ import promisestoOwedData from "../../assets/data/PromisesOwedToMe.json";
 import "../../assets/styles/action.css"
 import CustomTable from "./CustomTable";
 import CustomCardCollapse from "./CustomCardCollapse";
+import OfferAndInvitationGroupModals from "./GroupModals/OfferAndInvitationGroupModals";
 
 const Actions = () => {
+ 
+ 
   const pendingInvitationColumns = [
     {
       dataField: "from",
@@ -106,6 +110,95 @@ const Actions = () => {
     },
   ]
 
+  const pendingOfferColumns = [
+    {
+      dataField: "from",
+      text: "FROM",
+      sort: true,
+      footer: "FROM",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "description",
+      text: "DESCRIPTION",
+      sort: true,
+      footer: "DESCRIPTION",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "createdDate",
+      text: "CREATE DATE",
+      sort: true,
+      footer: "CREATE DATE",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "badgeName",
+      text: "BADGE NAME",
+      sort: true,
+      footer: "BADGE NAME",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "updatedDate",
+      text: "UPDATED DATE",
+      sort: true,
+      footer: "UPDATED DATE",
+      footerClasses: 'sortable'
+    },
+  ]
+
+  const promisestoOwedColumns = [
+    {
+      dataField: "to",
+      text: "TO",
+      sort: true,
+      footer: "TO",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "description",
+      text: "COMMITMENT DESCRIPTION",
+      sort: true,
+      footer: "COMMITMENT DESCRIPTION",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "committedDate",
+      text: "COMMITTED DATE",
+      sort: true,
+      footer: "COMMITTED DATE",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "dueDate",
+      text: "DUE DATE",
+      sort: true,
+      footer: "DUE DATE",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "badgeName",
+      text: "BADGE NAME",
+      sort: true,
+      footer: "BADGE NAME",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "requestABadge",
+      text: "REQUEST A BADGE",
+      sort: true,
+      footer: "REQUEST A BADGE",
+      footerClasses: 'sortable'
+    },
+    {
+      dataField: "bchain",
+      text: "BCHAIN ",
+      sort: true,
+      footer: "BCHAIN",
+      footerClasses: 'sortable'
+    },
+  ]
   const myPromisesDataMoc = myPromisesData.map(data => {
     return {
       ...data,
@@ -138,6 +231,15 @@ const Actions = () => {
     pendingOfferCollapse: false,
     promisedOwedToMeCollapse: false,
   });
+
+  const [isOpenModal, setIsOpenModal] = useState({
+    type: "",
+    isOpen: {
+      inputModal: false,
+      confirmModal: false,
+      updateModal: false
+    },
+  })
 
   const defaultSorted = [
     {
@@ -178,6 +280,13 @@ const Actions = () => {
       }
     }
   };
+
+  const handleCloseModal = () => {
+    setIsOpenModal({
+        ...isOpenModal,
+        isOpen: false
+    })
+  }
   return (
     <div>
       {/* Page Wrapper */}
@@ -205,6 +314,13 @@ const Actions = () => {
                 <div className="cta-btns mx-0 my-3">
                   <button
                     type="button"
+                    onClick={() => setIsOpenModal({
+                      ...isOpenModal,
+                      type: MODAL_OFFER_TYPE,
+                      isOpen: {
+                        inputModal: true
+                      }
+                    })}
                     className="btn bg-custom-secondary mr-2 ml-0 text-white"
                     data-toggle="modal"
                     data-target="#offer"
@@ -215,6 +331,13 @@ const Actions = () => {
                   </button>
                   <button
                     type="button"
+                    onClick={() => setIsOpenModal({
+                      ...isOpenModal,
+                      type: MODAL_INVITATION_TYPE,
+                      isOpen: {
+                        inputModal: true
+                      }
+                    })}
                     className="btn bg-custom-primary text-white"
                     data-toggle="modal"
                     data-target="#invitation"
@@ -262,800 +385,35 @@ const Actions = () => {
                 handleCollapse={() => handleCollapse(PENDING_INVITATION)}
               />
               {/* Collapsible Card Example */}
-              <div className="card shadow mb-4">
-                {/* Card Header - Accordion */}
-                <a
-                  onClick={() => handleCollapse(PENDING_OFFER)}
-                  className="d-block card-header py-3 text-decoration-none bg-custom-primary collapsed"
-                  data-toggle="collapse"
-                  role="button"
-                  aria-expanded="true"
-                  aria-controls="collapseCardAction"
-                >
-                  <h5 className="m-0 text-center text-white">
-                    Pending Offer <span className="small">(22)</span>
-                  </h5>
-                </a>
-                {/* Card Content - Collapse */}
-                <Collapse in={openCollapse.pendingOfferCollapse}>
-                  <div className="card-body" id="collapseCardAction4">
-                    <div className="table-responsive">
-                      <table
-                        className="table table-bordered table-striped table-hover small display nowrap hide-sort"
-                        width="100%"
-                        cellSpacing={0}
-                      >
-                        <thead className="thead-dark">
-                          <tr className="text-uppercase">
-                            <th>Actions</th>
-                            <th>From</th>
-                            <th>Description</th>
-                            <th>Created Date</th>
-                            <th>Badge Name</th>
-                            <th>Updated Date</th>
-                          </tr>
-                        </thead>
-                        <tfoot className="thead-dark">
-                          <tr className="text-uppercase">
-                            <th>Actions</th>
-                            <th>From</th>
-                            <th>Description</th>
-                            <th>Created Date</th>
-                            <th>Badge Name</th>
-                            <th>Updated Date</th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>$86,000</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="text-center">
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                  >
-                                    Accept
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-check fa-2x text-success" />
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block "
-                                  >
-                                    Decline
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    className="d-none d-sm-block d-md-none show-on-small"
-                                  >
-                                    <i className="fas fa-times fa-2x text-danger" />
-                                  </a>
-                                </span>
-                              </div>
-                            </td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>Alaska Ocean</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </Collapse>
-              </div>
-              {/* Collapsible Card Example */}
-              <div className="card shadow mb-4">
-                {/* Card Header - Accordion */}
-                <a
-                  onClick={() => handleCollapse(PROMISED_OWED_TO_ME)}
-                  className="d-block card-header py-3 text-decoration-none bg-custom-primary collapsed"
-                  data-toggle="collapse"
-                  role="button"
-                  aria-expanded="true"
-                  aria-controls="collapseCardAction"
-                >
-                  <h5 className="m-0 text-center text-white">
-                    Promises Owed To Me <span className="small">(27)</span>
-                  </h5>
-                </a>
-                {/* Card Content - Collapse */}
-                <Collapse in={openCollapse.promisedOwedToMeCollapse}>
-                  <div className="card-body" id="collapseCardAction3">
-                    <div className="table-responsive">
-                      <tr></tr>
-                      <table
-                        className="table table-bordered table-striped table-hover small display nowrap hide-sort"
-                        width="100%"
-                        cellSpacing={0}
-                      >
-                        <thead className="thead-dark">
-                          <tr className="text-uppercase">
-                            <th>Actions</th>
-                            <th>From</th>
-                            <th>Commitment Description</th>
-                            <th>Committed Date</th>
-                            <th>Due Date</th>
-                            <th>Badge Name</th>
-                            <th>Requested Date</th>
-                            <th>Bchain</th>
-                          </tr>
-                        </thead>
-                        <tfoot className="thead-dark">
-                          <tr className="text-uppercase">
-                            <th>Actions</th>
-                            <th>From</th>
-                            <th>Commitment Description</th>
-                            <th>Committed Date</th>
-                            <th>Due Date</th>
-                            <th>Badge Name</th>
-                            <th>Requested Date</th>
-                            <th>Bchain</th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>$86,000</td>
-                            <td>2009/01/12</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href="#">
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="align-middle text-center">
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
-                                >
-                                  Accept
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-check fa-2x mr-2 text-success" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
-                                >
-                                  Decline
-                                </a>
-                              </span>
-                              <span className="d-none d-sm-block d-md-none show-on-small">
-                                <i className="fas fa-times fa-2x text-danger" />
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
-                                >
-                                  Clarify
-                                </a>
-                              </span>
-                              <span>
-                                <a
-                                  href="#"
-                                  className="d-none d-sm-block d-md-none show-on-small"
-                                >
-                                  <i className="fas fa-history fa-2x" />
-                                </a>
-                              </span>
-                            </td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>$137,500</td>
-                            <td>Software Architect</td>
-                            <td className="text-center">
-                              <div>
-                                <a href>
-                                  <i className="fas fa-link fa-2x" />
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </Collapse>
-              </div>
-              {/* ------------------------------------------------------------------------------------------------------------------------------------------------------- */}
-            </div>
+              <CustomCardCollapse
+                id="collapseCardAction3"
+                title="Pending Offer"
+                amountValues={22}
+                content={
+                  <CustomTable
+                    data={pendingOfferData}
+                    columns={pendingOfferColumns}
+                    defaultSorted={defaultSorted}
+                  />
+                }
+                isCollapse={openCollapse.pendingOfferCollapse}
+                handleCollapse={() => handleCollapse(PENDING_OFFER)}
+              />
+              <CustomCardCollapse
+                id="collapseCardAction4"
+                title="Pending Invitation"
+                amountValues={34}
+                content={
+                  <CustomTable
+                    data={promisestoOwedData}
+                    columns={promisestoOwedColumns}
+                    defaultSorted={defaultSorted}
+                  />
+                }
+                isCollapse={openCollapse.promisedOwedToMeCollapse}
+                handleCollapse={() => handleCollapse(PROMISED_OWED_TO_ME)}
+              />
+             </div>
             {/* END .container-fluid */}
           </div>
           {/* End of Main Content */}
@@ -1117,570 +475,17 @@ const Actions = () => {
       {/* MODALS FOR SEND AN OFFER BUTTON */}
       {/*  */}
       {/* SEND AN OFFER MODAL */}
-      <div
-        className="modal fade"
-        id="offer"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel1">
-                Send An Offer
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label
-                    htmlFor="recipient-name-one"
-                    className="col-form-label"
-                  >
-                    Select the person to whom you want to send the offer from
-                    the list below
-                  </label>
-                  <select
-                    className="js-example-basic-multiple-three form-control"
-                    name="states[]"
-                    multiple="multiple"
-                  >
-                    <option value="AL">Pat Stummuler</option>
-                    <option value="WY">Andy Muller</option>
-                    <option value="JA">John Adam</option>
-                    <option value="VN">Victor Naval</option>
-                  </select>
-                </div>
-                <input
-                  type="email"
-                  className="form-control mb-2"
-                  id="exampleFormControlInput1"
-                  placeholder="Or, if not listed, enter the mobile number in international format"
-                />
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select the type of badge that you will issue from the list:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect2"
-                  >
-                    <option value selected disabled>
-                      Select Badge
-                    </option>
-                    <option>Teamwork</option>
-                    <option>Confidence</option>
-                    <option>Champion</option>
-                    <option>Leadership</option>
-                    <option>Communication</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Select or enter a custom Promise Card:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect2"
-                  >
-                    <option value selected disabled>
-                      Select A Promise Card
-                    </option>
-                    <option>
-                      I promise to extend a helping hand to a fellow team member
-                      this week
-                    </option>
-                    <option>
-                      I promise to respond cooperatively to a request from a
-                      teammate this week
-                    </option>
-                  </select>
-                  <input
-                    type="email"
-                    className="form-control mt-3"
-                    id="exampleFormControlInput1"
-                    placeholder="Or enter a custom promise card"
-                  />
-                </div>
-                <div className="form-group" style={{ marginBottom: "8px" }}>
-                  <input type="text" className="form-control" id="datetime1" />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-toggle="modal"
-                data-target="#offer-confirmation"
-                data-dismiss="modal"
-              >
-                Send Offer
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary border-0 text-white"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal For Offer Confirmation */}
-      <div
-        className="modal fade"
-        id="offer-confirmation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel9">
-                Offer Confirmation
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Your offer to{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      Aarij Khan +16479792745{" "}
-                    </span>{" "}
-                    (or all selected contacts) reads:{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      Alex
-                    </span>{" "}
-                    has offered to make this promise, "I promise to not talk
-                    negatively about team members this week“ due on{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      2021-06-11
-                    </span>{" "}
-                    to earn a{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      TEAMWORK
-                    </span>
-                    badge?
-                  </label>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-              >
-                Send It
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-target="#change-offer"
-                data-toggle="modal"
-                data-dismiss="modal"
-              >
-                Change It
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal For Change Offer */}
-      <div
-        className="modal fade"
-        id="change-offer"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel10">
-                Change Offer
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Select what you would like to change:
-                  </label>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Your Offer to{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-teammates"
-                        data-dismiss="modal"
-                      >
-                        Alexander +16479792745{" "}
-                      </a>
-                    </span>{" "}
-                    (or all selected contacts) reads:{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      Alex
-                    </span>{" "}
-                    has offered to make this promise,
-                    <span className="font-weight-bold reliably-blue">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-promise"
-                        data-dismiss="modal"
-                      >
-                        "I promise to not talk negatively about team members
-                        this week“
-                      </a>
-                    </span>
-                    due on{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-datetime"
-                        data-dismiss="modal"
-                      >
-                        2021-06-11{" "}
-                      </a>
-                    </span>
-                    at
-                    <span className="font-weight-bold reliably-orange">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-time"
-                        data-dismiss="modal"
-                      >
-                        {" "}
-                        19:24
-                      </a>
-                    </span>{" "}
-                    to earn a{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-badge"
-                        data-dismiss="modal"
-                      >
-                        TEAMWORK
-                      </a>
-                    </span>
-                    badge.
-                  </label>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Teammates Modal */}
-      <div
-        className="modal fade"
-        id="update-teammates"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel11">
-                Update Teammate
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor>
-                    Select the person to whom you want to send the Offer from
-                    the list below. Or, if not listed, enter the contact number
-                  </label>
-                  <select
-                    className="js-example-basic-multiple-four form-control"
-                    name="states[]"
-                    multiple="multiple"
-                  >
-                    <option value="AL">Pat Stummuler</option>
-                    <option value="WY">Andy Muller</option>
-                    <option value="JA">John Adam</option>
-                    <option value="VN">Victor Naval</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#offer-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#change-offer"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Promise Modal */}
-      <div
-        className="modal fade"
-        id="update-promise"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel12">
-                Update Promise
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select or choice a custom Promise Card:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect5"
-                  >
-                    <option value selected disabled>
-                      Select A Promise Card
-                    </option>
-                    <option>
-                      I promise to not talk negatively about team members this
-                      week
-                    </option>
-                    <option>
-                      I promise to give a compliment to a team member every day
-                      this week
-                    </option>
-                    <option>
-                      I promise to keep my communication job related this week
-                    </option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#offer-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Badge Modal */}
-      <div
-        className="modal fade"
-        id="update-badge"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel13">
-                Update Badge
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select a Badge:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect6"
-                  >
-                    <option value selected disabled>
-                      Select A Badge
-                    </option>
-                    <option>Promise Kept</option>
-                    <option>Teamwork</option>
-                    <option>Covid-19 P2P Safety</option>
-                    <option>Outreach</option>
-                    <option>Helping Hand</option>
-                    <option>Outreach</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#offer-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Date Modal */}
-      <div
-        className="modal fade"
-        id="update-datetime"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel14">
-                Update Date
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group" style={{ marginBottom: "8px" }}>
-                  <label htmlFor="message-text" className="col-form-label">
-                    Please provide a completion date and time:
-                  </label>
-                  <input type="text" className="form-control" id="datetime2" />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#offer-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Time Modal */}
+
+      <OfferAndInvitationGroupModals
+        show={isOpenModal.isOpen}
+        setShow={setIsOpenModal}
+        modalType={isOpenModal.type}
+        handleClose={handleCloseModal}
+      />
+
+
+
+   {/* Update Time Modal */}
       <div
         className="modal fade"
         id="update-time"
