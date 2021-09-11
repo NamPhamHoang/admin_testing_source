@@ -6,15 +6,10 @@ import InputForm from "../form/InputForm";
 import UpdateForm from "../form/UpdateForm";
 
 const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) => {
-    console.log(modalType)
     let title = "";
     switch(modalType) {
-        case MODAL_OFFER_TYPE: {
-            title = "Offer";
-        } break
-        case MODAL_INVITATION_TYPE: {
-            title = "Invitaition";
-        } break;
+        case MODAL_OFFER_TYPE: title = "Offer"; break
+        case MODAL_INVITATION_TYPE: title = "Invitaition"; break;
         default: break;
     }
     const [values, setValues] = useState({
@@ -35,32 +30,23 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
     }
 
     const onUpdate = (data) => {
-        console.log(data)
         switch(updateField.type) {
-            case TEAM_MATE: {
-                setValues({
+            case TEAM_MATE: setValues({
                     ...values,
                     teamMates: data
-                })
-            } break;
-            case TYPE_OF_BADGE: {
-                setValues({
+                }); break;
+            case TYPE_OF_BADGE: setValues({
                     ...values,
                     typeOfBadge: data
-                })
-            } break
-            case CUSTOMER_PROMISED_CARD: {
-                setValues({
+                }); break
+            case CUSTOMER_PROMISED_CARD: setValues({
                     ...values,
                     customPromiseCard: data
-                })
-            } break
-            case DATE_TIME: {
-                setValues({
+                }); break
+            case DATE_TIME: setValues({
                     ...values,
                     dateTime: data
-                })
-            } break
+                }); break
             default: break;
         }
     }
@@ -100,30 +86,22 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
 
     const handleFieldUpdate = (type) => {
         switch(type) {
-            case TEAM_MATE: {
-                setUpdateField({
+            case TEAM_MATE: setUpdateField({
                     name: "Team Mate",
                     type: TEAM_MATE
-                });
-            } break;
-            case TYPE_OF_BADGE: {
-                setUpdateField({
+                }); break;
+            case TYPE_OF_BADGE: setUpdateField({
                     name: "Promise",
                     type: TYPE_OF_BADGE
-                })
-            } break
-            case CUSTOMER_PROMISED_CARD: {
-                setUpdateField({
+                }); break
+            case CUSTOMER_PROMISED_CARD: setUpdateField({
                     name: "Badge",
                     type: CUSTOMER_PROMISED_CARD
-                })
-            } break
-            case DATE_TIME: {
-                setUpdateField({
+                }); break
+            case DATE_TIME: setUpdateField({
                     name: "Date Time",
                     type: DATE_TIME
-                })
-            } break
+                });break
             default: break;
         }
     }

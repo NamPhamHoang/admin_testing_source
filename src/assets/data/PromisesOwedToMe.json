@@ -1,23 +1,26 @@
 [
     {
+        "id": "1",
         "From":"Yogurt",
         "description":"Integration Specialist",
         "committedDate": "New York",
         "dueDate":"61",
         "badgeName": "2012/12/02",
-        "requestABadge": true,
+        "requestABadge": false,
         "bchain": true
     },
     {
+        "id": "2",
         "to":"Victor",
         "description":"Senior Javascript Developer",
         "committedDate": "2012/03/29",
         "dueDate":"22",
         "badgeName": "Edinburgh",
-        "requestABadge": true,
+        "requestABadge": false,
         "bchain": true
     },
     {
+        "id": "3",
         "to":"Maximillian",
         "description":"SAccountant",
         "committedDate": "2008/11/28",
@@ -27,6 +30,7 @@
         "bchain": true
     },
     {
+        "id": "4",
         "to":"Sedan",
         "description":"Sales Assistant",
         "committedDate": "San Francisco",

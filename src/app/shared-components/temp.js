@@ -11,7 +11,7 @@ import myPromisesData from "../../assets/data/MyPromise.json";
 import pendingOfferData from "../../assets/data/PendingOffer.json";
 import promisestoOwedData from "../../assets/data/PromisesOwedToMe.json";
 import "../../assets/styles/action.css"
-import CustomTable from "./CustomTable";
+import CustomTable from "./table/CustomTable";
 import CustomCardCollapse from "./CustomCardCollapse";
 import { Collapse } from "react-bootstrap";
 

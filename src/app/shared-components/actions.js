@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   MODAL_INVITATION_TYPE,
   MODAL_OFFER_TYPE,
+  MODAL_REQUEST_TYPE,
   MY_PROMISE,
   PENDING_INVITATION,
   PENDING_OFFER,
@@ -13,12 +14,77 @@ import myPromisesData from "../../assets/data/MyPromise.json";
 import pendingOfferData from "../../assets/data/PendingOffer.json";
 import promisestoOwedData from "../../assets/data/PromisesOwedToMe.json";
 import "../../assets/styles/action.css";
-import CustomTable from "./CustomTable";
+import CustomTable from "./table/CustomTable";
 import CustomCardCollapse from "./CustomCardCollapse";
 import OfferAndInvitationGroupModals from "./GroupModals/OfferAndInvitationGroupModals";
-
+import { Button } from "react-bootstrap";
+import RequestBadgeGroupModal from "./GroupModals/RequestBadgeGroupModal";
+import AcceptGroupModal from "./GroupModals/AcceptGroupModal";
+import {
+  myPromiseExpandRow,
+  pendingInvitationExpandRow,
+  pendingOfferExpandRow,
+  promisesOwedToMeExpandRow,
+} from "./table/ExpandRowTable";
 const Actions = () => {
   const pendingInvitationColumns = [
+    {
+      dataField: "action",
+      text: "ACTION ",
+      sort: true,
+      footer: "ACTION",
+      footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div className="d-flex flex-md-column flex-sm-row wrap">
+            <Button
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              Accept
+            </Button>
+            <span
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
+            </Button>
+            <span
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
+          </div>
+        );
+      },
+    },
     {
       dataField: "from",
       text: "FROM ",
@@ -62,6 +128,7 @@ const Actions = () => {
       text: "TO",
       sort: true,
       footer: "TO",
+      header: "TO",
       footerClasses: "sortable",
     },
     {
@@ -98,17 +165,118 @@ const Actions = () => {
       sort: true,
       footer: "REQUEST A BADGE",
       footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <>
+            {cell ? (
+              cell
+            ) : (
+              <>
+                <span className="d-flex justify-content-center">
+                  <Button
+                    className="clarify btn bg-custom-primary text-center text-white d-none d-md-block"
+                    onClick={() => {
+                      setIsOpenRequestModal({
+                        ...isOpenRequestModal,
+                        type: MODAL_REQUEST_TYPE,
+                        isOpen: {
+                          inputModal: true,
+                        },
+                      });
+                    }}
+                  >
+                    Request A Badge
+                  </Button>
+                </span>
+                <span className="d-none d-sm-block d-md-none show-on-small">
+                  <img src="img/validation.png" alt="validation" width="32px" />
+                </span>
+              </>
+            )}
+          </>
+        );
+      },
     },
     {
       dataField: "bchain",
       text: "BCHAIN ",
       sort: true,
+      classes: "d-sm-none d-md-table-cell",
       footer: "BCHAIN",
-      footerClasses: "sortable",
+      footerClasses: "sortable d-sm-none d-md-table-cell",
+      headerClasses: "d-sm-none d-md-table-cell",
+      formatter: (cell, row) => {
+        return (
+          <>
+            <div>
+              <a href="#">
+                <i class="fas fa-link fa-2x"></i>
+              </a>
+            </div>
+          </>
+        );
+      },
     },
   ];
 
   const pendingOfferColumns = [
+    {
+      dataField: "action",
+      text: "ACTION ",
+      sort: true,
+      footer: "ACTION",
+      footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div className="d-flex flex-md-column flex-sm-row wrap">
+            <Button
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              Accept
+            </Button>
+            <span
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
+            </Button>
+            <span
+              className="d-none d-sm-block d-md-none show-on-small"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
+          </div>
+        );
+      },
+    },
     {
       dataField: "from",
       text: "FROM",
@@ -147,6 +315,56 @@ const Actions = () => {
   ];
 
   const promisestoOwedColumns = [
+    {
+      dataField: "action",
+      text: "ACTION ",
+      sort: true,
+      footer: "ACTION",
+      footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div className="d-flex flex-md-column flex-sm-row wrap">
+            <Button
+              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block mb-2"
+              variant="primary"
+              type="button"
+              onClick={() =>
+                setIsOpenAcceptModal({
+                  isOpen: {
+                    inputModal: true,
+                  },
+                })
+              }
+            >
+              Accept
+            </Button>
+            <span className="d-none d-sm-block d-md-none show-on-small">
+              <i className="fas fa-check fa-2x mr-2 text-success" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn bg-custom-secondary text-center text-white d-none d-md-block mb-2 "
+            >
+              Decline
+            </Button>
+            <span className="d-none d-sm-block d-md-none show-on-small">
+              <i className="fas fa-times fa-2x text-danger" />
+            </span>
+            <Button
+              type="button"
+              className="clarify btn reliably-aqua text-center text-white d-none d-md-block"
+            >
+              Clarify
+            </Button>
+            <span>
+              <a href="#" className="d-none d-sm-block d-md-none show-on-small">
+                <i className="fas fa-history fa-2x" />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
     {
       dataField: "to",
       text: "TO",
@@ -188,6 +406,40 @@ const Actions = () => {
       sort: true,
       footer: "REQUEST A BADGE",
       footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <>
+            {cell ? (
+              cell
+            ) : (
+              <div className="d-flex justify-content-center">
+                <Button
+                  className="clarify btn bg-custom-primary text-center text-white d-none d-md-block"
+                  onClick={() => {
+                    setIsOpenRequestModal({
+                      ...isOpenRequestModal,
+                      type: MODAL_REQUEST_TYPE,
+                      isOpen: {
+                        inputModal: true,
+                      },
+                    });
+                  }}
+                >
+                  Request A Badge
+                </Button>
+
+                <span className="d-none d-sm-block d-md-none show-on-small">
+                  <img
+                    src="/img/validation.png"
+                    alt="validation"
+                    width="32px"
+                  />
+                </span>
+              </div>
+            )}
+          </>
+        );
+      },
     },
     {
       dataField: "bchain",
@@ -195,30 +447,18 @@ const Actions = () => {
       sort: true,
       footer: "BCHAIN",
       footerClasses: "sortable",
+      formatter: (cell, row) => {
+        return (
+          <div>
+            <a href="#">
+              <i class="fas fa-link fa-2x"></i>
+            </a>
+          </div>
+        );
+      },
     },
   ];
-  const myPromisesDataMoc = myPromisesData.map((data) => {
-    return {
-      ...data,
-      requestABadge: () => {
-        <>
-          <span>
-            <a
-              href="#"
-              data-target="#request-badge-modal"
-              data-toggle="modal"
-              className="clarify btn bg-custom-primary text-center text-white d-none d-md-block "
-            >
-              Request A Badge
-            </a>
-          </span>
-          <span className="d-none d-sm-block d-md-none show-on-small">
-            <img src="img/validation.png" alt="validation" width="32px" />
-          </span>
-        </>;
-      },
-    };
-  });
+
   const [openCollapse, setOpenCollapse] = useState({
     myPromiseCollapse: false,
     pendingInvitationCollapse: false,
@@ -234,7 +474,23 @@ const Actions = () => {
       updateModal: false,
     },
   });
+  const [isOpenRequestModal, setIsOpenRequestModal] = useState({
+    type: "",
+    isOpen: {
+      inputModal: false,
+      confirmModal: false,
+      updateModal: false,
+    },
+  });
 
+  const [isOpenAcceptModal, setIsOpenAcceptModal] = useState({
+    type: "",
+    isOpen: {
+      inputModal: false,
+      confirmModal: false,
+      updateModal: false,
+    },
+  });
   const defaultSorted = [
     {
       dataField: "name",
@@ -278,6 +534,20 @@ const Actions = () => {
   const handleCloseModal = () => {
     setIsOpenModal({
       ...isOpenModal,
+      isOpen: false,
+    });
+  };
+
+  const handleCloseRequestModal = () => {
+    setIsOpenRequestModal({
+      ...isOpenRequestModal,
+      isOpen: false,
+    });
+  };
+
+  const handleCloseAcceptModal = () => {
+    setIsOpenAcceptModal({
+      ...isOpenAcceptModal,
       isOpen: false,
     });
   };
@@ -346,11 +616,8 @@ const Actions = () => {
                   </button>
                 </div>
               </div>
-              {/* ------------------------------------------------------------------------------------------------------------------------------------------------------ */}
-              {/* ----------------------- */}
-              {/* ----------------- */}
+
               {/* DataTables Actions */}
-              {/* ----------------- */}
               {/* Show Only on Medium and Large Devices */}
               {/* Collapsible Card Example */}
               <CustomCardCollapse
@@ -359,9 +626,10 @@ const Actions = () => {
                 amountValues={76}
                 content={
                   <CustomTable
-                    data={myPromisesDataMoc}
+                    data={myPromisesData}
                     columns={myPromiseColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={myPromiseExpandRow}
                   />
                 }
                 isCollapse={openCollapse.myPromiseCollapse}
@@ -377,6 +645,7 @@ const Actions = () => {
                     data={pendingInvitaionData}
                     columns={pendingInvitationColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={pendingInvitationExpandRow}
                   />
                 }
                 isCollapse={openCollapse.pendingInvitationCollapse}
@@ -392,6 +661,7 @@ const Actions = () => {
                     data={pendingOfferData}
                     columns={pendingOfferColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={pendingOfferExpandRow}
                   />
                 }
                 isCollapse={openCollapse.pendingOfferCollapse}
@@ -399,13 +669,14 @@ const Actions = () => {
               />
               <CustomCardCollapse
                 id="collapseCardAction4"
-                title="Pending Invitation"
-                amountValues={34}
+                title="Promises Owed To Me"
+                amountValues={27}
                 content={
                   <CustomTable
                     data={promisestoOwedData}
                     columns={promisestoOwedColumns}
                     defaultSorted={defaultSorted}
+                    expandRow={promisesOwedToMeExpandRow}
                   />
                 }
                 isCollapse={openCollapse.promisedOwedToMeCollapse}
@@ -481,6 +752,19 @@ const Actions = () => {
         handleClose={handleCloseModal}
       />
 
+      <RequestBadgeGroupModal
+        show={isOpenRequestModal.isOpen}
+        setShow={setIsOpenRequestModal}
+        modalType={isOpenRequestModal.type}
+        handleClose={handleCloseRequestModal}
+      />
+
+      <AcceptGroupModal
+        show={isOpenAcceptModal.isOpen}
+        setShow={setIsOpenAcceptModal}
+        modalType={isOpenAcceptModal.type}
+        handleClose={handleCloseAcceptModal}
+      />
       {/* Update Time Modal */}
       <div
         className="modal fade"
@@ -868,492 +1152,6 @@ const Actions = () => {
                 type="button"
                 className="btn bg-custom-secondary text-white border-0"
                 data-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* MODALS FOR SEND AN INVITATION BUTTON */}
-      <div
-        className="modal fade"
-        id="invitation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="invitation"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel2">
-                Send An Invitation
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Select the type of badge that you will issue from the list:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect3"
-                  >
-                    <option value selected disabled>
-                      Select a Badge
-                    </option>
-                    <option>Teamwork</option>
-                    <option>Confidence</option>
-                    <option>Champion</option>
-                    <option>Leadership</option>
-                    <option>Communication</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select or enter a custom Promise Card:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect4"
-                  >
-                    <option value selected disabled>
-                      Select A Promise Card
-                    </option>
-                    <option>
-                      I will be responsive to the requests of my teammates
-                    </option>
-                    <option>
-                      I will be responsive to help other teammates to achieve
-                      their badges
-                    </option>
-                    <option>
-                      I promise to give a compliment to a team member every day
-                      this week
-                    </option>
-                    <option>
-                      I promise to keep my communication job related this week
-                    </option>
-                  </select>
-                </div>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput2"
-                  placeholder="Or enter a custom promise card"
-                />
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Select the person to whom you want to send the invitation
-                    from the list below
-                  </label>
-                  <select
-                    className="js-example-basic-multiple-one form-control"
-                    name="states[]"
-                    multiple="multiple"
-                  >
-                    <option value="AL">Pat Stummuler</option>
-                    <option value="WY">Andy Muller</option>
-                    <option value="JA">John Adam</option>
-                    <option value="VN">Victor Naval</option>
-                  </select>
-                </div>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="If member is not listed, enter mobile number instead..."
-                />
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary border-0 text-white"
-                data-dismiss="modal"
-                data-target="#invitation-confirmation"
-                data-toggle="modal"
-              >
-                Send Invitation
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-target
-                data-toggle="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal For Invitation Confirmation */}
-      <div
-        className="modal fade"
-        id="invitation-confirmation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel10">
-                invitation Confirmation
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Your Invitation to{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      Aarij Khan +16479792745{" "}
-                    </span>{" "}
-                    (or all selected contacts) reads:{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      Alex
-                    </span>{" "}
-                    has invited to make this promise, "I promise to not talk
-                    negatively about team members this week“ to earn a{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      TEAMWORK
-                    </span>
-                    badge
-                  </label>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-              >
-                Send It
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-target="#change-invitation"
-                data-toggle="modal"
-                data-dismiss="modal"
-              >
-                Change It
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Modal For Change Invitation */}
-      <div
-        className="modal fade"
-        id="change-invitation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel19">
-                Change Invitation
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Select what you would like to change:
-                  </label>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="recipient-name" className="col-form-label">
-                    Your invitation to{" "}
-                    <span className="font-weight-bold reliably-blue">
-                      <a
-                        href
-                        data-toggle="modal"
-                        data-target="#update-teammates-invitation"
-                        data-dismiss="modal"
-                      >
-                        Hussey +46579792745{" "}
-                      </a>
-                    </span>{" "}
-                    (or all selected contacts) reads:{" "}
-                    <span className="font-weight-bold reliably-orange">
-                      Alex
-                    </span>{" "}
-                    has invited to make this promise,
-                    <span className="font-weight-bold reliably-blue">
-                      <a
-                        href
-                        className="font-weight-bold"
-                        data-toggle="modal"
-                        data-target="#update-promise-invitation"
-                        data-dismiss="modal"
-                      >
-                        "I promise to not talk negatively about team members
-                        this week“{" "}
-                      </a>
-                    </span>
-                    to earn a{" "}
-                    <span>
-                      <a
-                        href
-                        className="font-weight-bold"
-                        data-toggle="modal"
-                        data-target="#update-badge-invitation"
-                        data-dismiss="modal"
-                      >
-                        Teamwork
-                      </a>
-                    </span>{" "}
-                    badge
-                  </label>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Teammates Modal Invitation */}
-      <div
-        className="modal fade"
-        id="update-teammates-invitation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel21">
-                Update Teammates
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor>
-                    Select the person to whom you want to send the invitation
-                    from the list below. Or, if not listed, enter the contact
-                    number
-                  </label>
-                  <select
-                    className="js-example-basic-multiple-two form-control"
-                    name="states[]"
-                    multiple="multiple"
-                  >
-                    <option value="AL">Pat Stummuler</option>
-                    <option value="WY">Andy Muller</option>
-                    <option value="JA">John Adam</option>
-                    <option value="VN">Victor Naval</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#invitation-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#change-invitation"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Promise Modal Invitation */}
-      <div
-        className="modal fade"
-        id="update-promise-invitation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel22">
-                Update Promise
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select or choice a custom Promise Card:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect5"
-                  >
-                    <option value selected disabled>
-                      Select A Promise Card
-                    </option>
-                    <option>
-                      I promise to not talk negatively about team members this
-                      week
-                    </option>
-                    <option>
-                      I promise to give a compliment to a team member every day
-                      this week
-                    </option>
-                    <option>
-                      I promise to keep my communication job related this week
-                    </option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#invitation-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#change-invitation"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Update Badge Modal Invitation */}
-      <div
-        className="modal fade"
-        id="update-badge-invitation"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="offer"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header bg-custom-primary text-white">
-              <h5 className="modal-title" id="exampleModalLabel23">
-                Update Badge
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="message-text" className="col-form-label">
-                    Select a Badge:
-                  </label>
-                  <select
-                    className="form-control"
-                    id="exampleFormControlSelect6"
-                  >
-                    <option value selected disabled>
-                      Select the type of badge that you will issue from the list
-                      below
-                    </option>
-                    <option>Promise Kept</option>
-                    <option>Teamwork</option>
-                    <option>Covid-19 P2P Safety</option>
-                    <option>Outreach</option>
-                    <option>Helping Hand</option>
-                    <option>Outreach</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn bg-custom-secondary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target="#invitation-confirmation"
-              >
-                Update
-              </button>
-              <button
-                type="button"
-                className="btn bg-custom-primary text-white border-0"
-                data-dismiss="modal"
-                data-toggle="modal"
-                data-target
               >
                 Close
               </button>
