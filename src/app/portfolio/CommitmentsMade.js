@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CustomCardCollapse from "../shared-components/CustomCardCollapse";
-import CustomTable from "../shared-components/CustomTable";
+import CustomTable from "../shared-components/table/CustomTable";
 import myPromisesData from "../../assets/data/MyPromisePortfolo.json";
 import {
   MY_PROMISE,

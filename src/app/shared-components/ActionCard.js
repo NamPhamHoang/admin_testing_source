@@ -2,18 +2,13 @@ import React, { forwardRef } from "react";
 import * as PropTypes from "prop-types";
 
 const ActionCard = forwardRef((props) => {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div></div>;
 });
 
 ActionCard.propTypes = {
-    header: PropTypes.node,
-    content: PropTypes.node,
-    
-}
+  header: PropTypes.node,
+  content: PropTypes.node,
+};
 
-ActionCard.defaultProps = {}
+ActionCard.defaultProps = {};
 return ActionCard;
