@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import {
   CUSTOMER_PROMISED_CARD,
-  DATE_TIME,
   TEAM_MATE,
   TYPE_OF_BADGE,
-} from "../../constants/types";
+} from "../../../constants/types";
 
-const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
+const InvitationConfirmForm = ({ values, onSubmitData, onHandleShowModal }) => {
   const [contextType, setContextType] = useState("CONFIRM");
   const transferUpdate = () => {
     setContextType("UPDATE");
@@ -18,7 +17,7 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
       <Form.Text className="text-muted">
         {contextType === "CONFIRM" ? (
           <label for="recipient-name" className="col-form-label">
-            Your offer to{" "}
+            Your Invitation to{" "}
             <span className="font-weight-bold reliably-blue">
               {values && values.teamMates.length > 0
                 ? values.teamMates.reduce((pre, cur) => {
@@ -29,10 +28,7 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
             </span>{" "}
             (or all selected contacts) reads:{" "}
             <span className="font-weight-bold reliably-orange">Alex</span> has
-            offered to make this promise, "{values.customPromiseCard}“ due on{" "}
-            <span className="font-weight-bold reliably-blue">
-              {dateTime && (dateTime.date)} at {dateTime && (dateTime.time)}{" "}
-            </span>{" "}
+            invited to make this promise, "{values.customPromiseCard}“ {" "}
             to earn a{" "}
             <span className="font-weight-bold reliably-orange">
               {values.enterCustomPromiseCard}{" "}
@@ -48,7 +44,7 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
             </div>
             <div className="form-group">
               <label for="recipient-name" className="col-form-label">
-                Your Offer to{" "}
+                Your invitation to{" "}
                 <span
                   className="font-weight-bold reliably-blue update_text"
                   onClick={() => onHandleShowModal("UPDATE", TEAM_MATE)}
@@ -62,7 +58,7 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
                 </span>
                 (or all selected contacts) reads:
                 <span className="font-weight-bold reliably-orange"> Alex </span>
-                has offered to make this promise,
+                has invited to make this promise,
                 <span
                   className="font-weight-bold reliably-blue update_text"
                   onClick={() =>
@@ -70,13 +66,6 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
                   }
                 >
                   "{values.customPromiseCard}“{" "}
-                </span>
-                due on{" "}
-                <span
-                  className="font-weight-bold reliably-blue update_text"
-                  onClick={() => onHandleShowModal("UPDATE", DATE_TIME)}
-                >
-                  {dateTime && (dateTime.date)} at {dateTime && (dateTime.time)}{" "}
                 </span>
                 to earn a{" "}
                 <span
@@ -108,4 +97,4 @@ const ConfirmForm = ({ values, dateTime, onSubmitData, onHandleShowModal }) => {
   );
 };
 
-export default ConfirmForm;
+export default InvitationConfirmForm;

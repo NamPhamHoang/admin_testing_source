@@ -1,18 +1,13 @@
 /* eslint-disable default-case */
-import React, {useState} from "react";
+import React from "react";
 import { Form, Button } from "react-bootstrap";
 import Select from "react-select";
-import { MODAL_OFFER_TYPE } from "../../constants/types";
-import TimePickerWrapper from "../TimePickerWrapper";
 
-const InputForm = ({
-  dateTime,
-  setDateTime,
+const InvitationInputForm = ({
   values,
   setValues,
   onSubmit,
   onHandleShowModal,
-  modalType,
 }) => {
   const people = [
     { value: "Andy Muller", label: "Andy Muller" },
@@ -117,17 +112,6 @@ const InputForm = ({
         />
       </Form.Group>
 
-     
-      <Form.Group>
-            <Form.Text className="text-muted">
-              Please provide a comletion date and time
-            </Form.Text>
-            <TimePickerWrapper
-                  position="bottom"
-                  setValues = {setDateTime}
-                  values = {dateTime}
-            />
-          </Form.Group>
       <hr />
       <div className="d-flex justify-content-end">
         <Button
@@ -139,7 +123,7 @@ const InputForm = ({
             onSubmit(values);
           }}
         >
-          {modalType === MODAL_OFFER_TYPE ? "Send Offer" : "Send Invitation"}
+          Send Invitation
         </Button>
         <Button type="button">Cancel</Button>
       </div>
@@ -147,4 +131,4 @@ const InputForm = ({
   );
 };
 
-export default InputForm;
+export default InvitationInputForm;

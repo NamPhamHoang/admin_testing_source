@@ -3,13 +3,11 @@ import { Form, Button } from "react-bootstrap";
 import Select from "react-select";
 import {
   CUSTOMER_PROMISED_CARD,
-  DATE_TIME,
   TEAM_MATE,
   TYPE_OF_BADGE,
-} from "../../constants/types";
-import TimePickerWrapper from "../TimePickerWrapper";
+} from "../../../constants/types";
 
-const UpdateForm = ({dateTime, setDateTime, values, setValues, onUpdate, onHandleShowModal, type }) => {
+const InvitationUpdateForm = ({onUpdate, onHandleShowModal, type }) => {
     const [updateValues, setUpdateValue] = useState();
   const people = [
     { value: "Andy Muller", label: "Andy Muller" },
@@ -85,18 +83,6 @@ onHandleShowModal("CONFIRM")
             />
           </Form.Group>
         ); break;
-    case DATE_TIME: content = (
-          <Form.Group>
-          <Form.Text className="text-muted">
-            Please provide a comletion date and time
-          </Form.Text>
-          <TimePickerWrapper
-                position="bottom"
-                setValues = {setDateTime}
-                values = {dateTime}
-          />
-        </Form.Group>
-        ); break;
     default:
       break;
   }
@@ -119,4 +105,4 @@ onHandleShowModal("CONFIRM")
   );
 };
 
-export default UpdateForm;
+export default InvitationUpdateForm;

@@ -31,16 +31,14 @@ const RequestBadgeGroupModal = ({show, modalType, setShow, handleClose}) => {
                     updateModal: false,
                 }
             }); break;
-            case "UPDATE": {
-                setShow({
+            case "UPDATE": setShow({
                     ...show,
                     isOpen: {
                         inputModal: false,
                         confirmModal: false,
                         updateModal: true,
                     }
-                })
-            } break
+                }); break
             default: break;
         }
     }

@@ -88,7 +88,7 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <img src={Faq} width="30px" />
+            <img src={Faq} width="30px" alt="Faq" />
           </a>
           {/* Dropdown - Alerts */}
         </li>
@@ -104,7 +104,7 @@ const Header = () => {
             aria-expanded="false"
           >
             {/* Counter - Messages */}
-            <img src={PDF} width="30px" />
+            <img src={PDF} width="30px" alt="PDF"/>
           </a>
         </li>
         <div className="topbar-divider d-none d-sm-block" />
@@ -122,7 +122,7 @@ const Header = () => {
             <span className="mr-2 d-none d-lg-inline text-dark h5 mb-0 font-weight-bold">
               Alex Todd
             </span>
-            <img className="img-profile rounded-circle" src={Profile} />
+            <img className="img-profile rounded-circle" src={Profile} alt="Circl"/>
           </a>
           {/* Dropdown - User Information */}
           <div

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Collapse } from "react-bootstrap";
-import { PENDING_INVITATION } from "../constants/types";
 import "../portfolio/style.css";
 
 const CustomCardCollapse = ({

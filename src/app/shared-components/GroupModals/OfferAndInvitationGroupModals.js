@@ -9,7 +9,7 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
     let title = "";
     switch(modalType) {
         case MODAL_OFFER_TYPE: title = "Offer"; break
-        case MODAL_INVITATION_TYPE: title = "Invitaition"; break;
+        case MODAL_INVITATION_TYPE: title = "Invitation"; break;
         default: break;
     }
     const [values, setValues] = useState({
@@ -18,14 +18,18 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
         typeOfBadge: "",
         customPromiseCard: "",
         enterCustomPromiseCard: "",
-        dateTime: ""
     })
 
+    const [dateTime, setDateTime] = useState({
+        date: "",
+        time: ""
+    })
     const [updateField, setUpdateField] = useState({
         name: "",
         type: ""
     });
     const onSubmit = () => {
+        console.log(dateTime)
         console.log(values)
     }
 
@@ -114,6 +118,8 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
                 key={title}
                 form={
                     <InputForm 
+                        dateTime={dateTime}
+                        setDateTime={setDateTime}
                         values={values} 
                         setValues={setValues}
                         onSubmit={onSubmit} 
@@ -131,6 +137,8 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
                 form={
                     <ConfirmForm 
                         onSubmitData={onSubmit} 
+                        dateTime={dateTime}
+                        setDateTime={setDateTime}
                         values={values} 
                         onHandleShowModal={onHandleShowModal}
                     />
@@ -143,7 +151,15 @@ const OfferAndInvitationGroupModals = ({show, modalType, setShow, handleClose}) 
                 title={`Update ${updateField.name}`}
                 key={`CHANGE_${title}`}
                 form={
-                    <UpdateForm onUpdate={onUpdate} type={updateField.type} onHandleShowModal={onHandleShowModal}/>
+                    <UpdateForm 
+                        dateTime={dateTime}
+                        setDateTime={setDateTime}
+                        values={values} 
+                        setValues={setValues}
+                        onUpdate={onUpdate}
+                        type={updateField.type} 
+                        onHandleShowModal={onHandleShowModal}
+                    />
                 }
             />
         </>

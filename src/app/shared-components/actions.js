@@ -472,6 +472,7 @@ const Actions = () => {
       updateModal: false,
     },
   });
+
   const [isOpenRequestModal, setIsOpenRequestModal] = useState({
     type: "",
     isOpen: {
@@ -489,6 +490,7 @@ const Actions = () => {
       updateModal: false,
     },
   });
+
   const defaultSorted = [
     {
       dataField: "name",
@@ -549,21 +551,14 @@ const Actions = () => {
       isOpen: false,
     });
   };
+
   return (
     <div style={{ width: "100%" }}>
       {/* Page Wrapper */}
       <div id="wrapper">
-        {/* Sidebar */}
-
-        {/* End of Sidebar */}
-        {/* ------------------------------------------------------------------------------------------------------------------------------ */}
-        {/* Content Wrapper */}
         <div id="content-wrapper" className="d-flex flex-column">
           {/* Main Content */}
           <div id="content">
-            {/* Topbar */}
-
-            {/* End of Topbar */}
             {/* Begin Page Content */}
             <div className="container-fluid">
               {/* Page Heading */}
@@ -683,10 +678,6 @@ const Actions = () => {
             </div>
             {/* END .container-fluid */}
           </div>
-          {/* End of Main Content */}
-          {/* Footer */}
-
-          {/* End of Footer */}
         </div>
         {/* End of Content Wrapper */}
       </div>
@@ -763,6 +754,7 @@ const Actions = () => {
         modalType={isOpenAcceptModal.type}
         handleClose={handleCloseAcceptModal}
       />
+
       {/* Update Time Modal */}
       {/* Bootstrap core JavaScript*/}
       {/* Core plugin JavaScript*/}

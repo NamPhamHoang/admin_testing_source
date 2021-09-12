@@ -41,7 +41,7 @@ const Badges = () => {
                     </div>
                   </div>
                   <div className="col-auto text-center align-middle">
-                    <img src={item.img} width="60px" />
+                    <img src={item.img} width="60px" alt="item"/>
                   </div>
                 </div>
               </div>
