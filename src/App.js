@@ -1,9 +1,9 @@
 import "./App.css";
 import "./assets/styles/sb-admin-2.min.css";
 import "./assets/styles/custom.css";
-import "./assets/styles/material/default.css"
+import "./assets/styles/material/default.css";
 import Actions from "./app/shared-components/actions";
-import 'react-datepicker/dist/react-datepicker.css'
+// import "react-datepicker/dist/react-datepicker.css";
 // import Temp from "./app/shared-components/temp";
 import Portfolio from "./app/portfolio";
 import Sidebar from "./app/layouts/SideBar";

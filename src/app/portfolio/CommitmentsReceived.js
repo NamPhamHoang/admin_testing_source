@@ -137,20 +137,40 @@ const CommitmentsReceived = () => {
 
   return (
     <div className="card shadow card-all">
-      <a
-        href="#collapseCardExampleTwo"
-        className="d-block card-header py-3 bg-custom-secondary text-center collaspe2"
-        data-toggle="collapse"
-        role="button"
+      <div
+        style={{ backgroundColor: "#004a97" }}
         onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
       >
-        <h5 className="m-0 text-center text-white">
-          Commitments Received And Badges Issued
-        </h5>
-      </a>
-
+        <a
+          href="#collapseCardExampleTwo"
+          className="d-flex card-header py-3 text-center"
+          data-toggle="collapse"
+          role="button"
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+          style={{
+            justifyContent: "space-between",
+            width: "49vw",
+            padding: 0,
+            backgroundColor: "#004a97",
+          }}
+        >
+          <i
+            class="fas fa-angle-down"
+            style={{
+              color: "#fff",
+              margin: "5px 0 0 25px",
+              transform: !open ? "rotate(270deg)" : "",
+            }}
+          ></i>
+          <h5
+            style={{ width: "15em", whiteSpace: "nowrap" }}
+            className="m-0 text-center text-white"
+          >
+            Commitments Received And Badges Issued
+          </h5>
+        </a>
+      </div>
       <Collapse in={open}>
         <div id="example-collapse-text">
           <div className="card-body collapse show" id="collapseCardExampleTwo">

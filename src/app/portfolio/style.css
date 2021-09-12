@@ -21,3 +21,13 @@
 .collaspe2 {
   background-color: #022ba2 !important;
 }
+.collapsed:after {
+  content: "\f105";
+  transform: rotate(360deg);
+  margin-left: 18px;
+  margin-top: 3px;
+  display: none;
+}
+.card .card-header[data-toggle="collapse"]:after {
+  display: none;
+}

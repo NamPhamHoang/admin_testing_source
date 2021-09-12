@@ -13,24 +13,26 @@ const CustomCardCollapse = ({
   color,
 }) => {
   return (
-    <div
-      className="card shadow mb-4"
-      //  style={{ backgroundColor: "#ff7f41" }}
-    >
+    <div className="card shadow mb-4">
       {/* Card Header - Accordion */}
-      <div style={{ backgroundColor: "#ff7f41" }}>
+      <div style={{ backgroundColor: !color ? "#ff7f41" : "#004a97" }}>
         <a
           onClick={handleCollapse}
           className={
             color
-              ? "d-flex card-header py-3 text-decoration-none  collapsed collaspe2"
+              ? "d-flex card-header py-3 text-decoration-none  collapsed "
               : "d-flex card-header py-3 text-decoration-none bg-custom-secondary collapsed"
           }
           data-toggle="collapse"
           role="button"
           aria-expanded="true"
           aria-controls="collapseCardAction"
-          style={{ justifyContent: "space-between", width: "49vw", padding: 0 }}
+          style={{
+            justifyContent: "space-between",
+            width: "49vw",
+            padding: 0,
+            backgroundColor: !color ? "#ff7f41" : "#004a97",
+          }}
         >
           <i
             class="fas fa-angle-down"
